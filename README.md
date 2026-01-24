@@ -11,14 +11,7 @@ Over time, the scripts grew a bit, the ideas got clearer, and the project slowly
 
 ## Why I Built This
 
-I train with a simple push / pull / core split and had a few recurring questions:
-
-- Am I actually balanced, or does it just *feel* balanced?
-- Is push work slowly dominating without me noticing?
-- Which muscle groups am I consistently neglecting?
-- Does looking at “last 3 sessions” tell me more than a calendar week?
-
-Instead of guessing, I decided to log everything and see what falls out.
+I train with a simple push / pull / core split and wanted to visualize if everything is balanced. I decided to log everything and see what falls out.
 
 ---
 
