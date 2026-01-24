@@ -1,42 +1,69 @@
-# 🏋️ Workout Analytics Tracker
+# 🏋️ Workout Analytics — Personal Experiment
 
-A **session-based workout logging and analytics system** designed to analyze
-training balance, muscle load, recovery, and routine-level overload.
+This repository is a **personal experiment** I built to log and analyze **my own workouts**.
 
-This is **not** a generic fitness app.
-It focuses on **relative training stimulus**, explainability, and long-term trend reliability.
+I wasn’t trying to build a fitness app or a polished product.  
+I just wanted a better way to understand **what my training actually looks like** once you step back and look at the data.
 
----
-
-## 🔍 Key Features
-
-- Guided workout logging (push / pull / core routines)
-- Fine-grained exercise → muscle modeling
-- Tier-1 muscle aggregation (Chest, Back, Shoulders, Arms, Legs, Core)
-- Session-based aggregation:
-  - Last 3 sessions ≈ weekly
-  - Last 12 sessions ≈ monthly
-- Muscle balance & overload detection
-- Push / Pull ratios:
-  - Muscle-wise (fatigue balance)
-  - Exercise-wise (programming balance)
-- Unified muscle readiness score
-- Sub-muscle coverage analysis
-- Streamlit dashboard for visualization
+Over time, the scripts grew a bit, the ideas got clearer, and the project slowly became more structured.
 
 ---
 
-## 🧠 Design Philosophy
+## Why I Built This
 
-- **Session-based aggregation** instead of calendar time
-- No fake precision (no RIR, tempo, wearables)
-- Clear separation of concerns:
-  - `logger.py` → data collection
-  - `engine/` → analytics logic
-  - `streamlit_app.py` → visualization only
-- Relative load modeling, not absolute biomechanics
+I train with a simple push / pull / core split and had a few recurring questions:
+
+- Am I actually balanced, or does it just *feel* balanced?
+- Is push work slowly dominating without me noticing?
+- Which muscle groups am I consistently neglecting?
+- Does looking at “last 3 sessions” tell me more than a calendar week?
+
+Instead of guessing, I decided to log everything and see what falls out.
 
 ---
 
-## 📁 Project Structure
+## What This Is (and What It Isn’t)
 
+### This *is*
+- A personal logging + analysis tool
+- Built specifically around my own routines
+- Session-based (not calendar-based)
+- Simple, explainable, and hackable
+- A place to experiment with analytics ideas
+
+### This *is not*
+- A commercial fitness app
+- A universal training recommendation system
+- A biomechanical or medical model
+- Something meant to replace a coach or common sense
+
+All numbers here represent **relative training stimulus**, nothing more.
+
+---
+
+## Ideas I’m Playing With
+
+- Mapping exercises to muscle groups in a simple way
+- Collapsing many muscles into a few “big picture” groups
+- Looking at training in terms of **sessions**, not weeks
+- Comparing push vs pull from two angles:
+  - muscle fatigue
+  - exercise programming
+- Tracking routine-level overload (push / pull / core)
+- Very lightweight recovery and readiness heuristics
+
+---
+
+## How the Project Is Organized
+
+engine/
+├── config.py # constants, exercise models
+├── core.py # muscle contribution logic
+├── aggregation.py # session-based summaries
+├── recovery.py # simple fatigue & readiness ideas
+└── analysis.py # interpretation helpers
+
+logger.py # CLI workout logging
+main.py # run a logging session
+streamlit_app.py # interactive dashboard
+visuals.py # plotting helpers
