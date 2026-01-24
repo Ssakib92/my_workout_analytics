@@ -1,6 +1,8 @@
 # Python
 __pycache__/
 old/
+.tmp.driveupload/
+.tmp.drivedownload/
 *.pyc
 *.pyo
 

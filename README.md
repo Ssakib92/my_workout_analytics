@@ -46,17 +46,3 @@ All numbers here represent **relative training stimulus**, nothing more.
 - Very lightweight recovery and readiness heuristics
 
 ---
-
-## How the Project Is Organized
-
-engine/
-├── config.py # constants, exercise models
-├── core.py # muscle contribution logic
-├── aggregation.py # session-based summaries
-├── recovery.py # simple fatigue & readiness ideas
-└── analysis.py # interpretation helpers
-
-logger.py # CLI workout logging
-main.py # run a logging session
-streamlit_app.py # interactive dashboard
-visuals.py # plotting helpers
