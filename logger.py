@@ -32,7 +32,6 @@ ROUTINES = {
         "Rear Delt Fly",
         "DB Curl",
         "Hammer Curl",
-        "Push-up",
         "Superman"
     ],
 
@@ -40,14 +39,14 @@ ROUTINES = {
         "Goblet Squat",
         "Lunge",
         "High Knees",
-        "Crunch",
+        "Hanging Knee Raise",
         "Plank",
+        "Active Hang",
         "Leg Raise",
         "Russian Twist",
         "DB Side Bends",
         "Glute Bridge", 
         "Mountain Climber",
-        "Flutter Kicks",
         "Burpee"
     ]
 }

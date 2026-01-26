@@ -38,7 +38,9 @@ EXERCISE_LIBRARY = {
     "DB Side Bends": {"muscles": {"Obliques": 0.7, "Core": 0.3}},
     "Mountain Climber": {"muscles": {"Core": 0.4, "Hip Flexors": 0.25, "Shoulders": 0.2, "Quads": 0.15}},
     "Flutter Kicks": {"muscles": {"Lower Abs": 0.6, "Hip Flexors": 0.25, "Core": 0.15}},
-    "Burpee": {"muscles": {"Quads": 0.25, "Glutes": 0.2, "Chest": 0.15, "Shoulders": 0.15, "Core": 0.15, "Calves": 0.1}}
+    "Burpee": {"muscles": {"Quads": 0.25, "Glutes": 0.2, "Chest": 0.15, "Shoulders": 0.15, "Core": 0.15, "Calves": 0.1}},
+    "Active Hang": {"muscles": {"Forearms": 0.3,"Upper Back": 0.25,"Shoulders": 0.25,"Core": 0.2}},
+    "Hanging Knee Raise": {"muscles": {"Lower Abs": 0.45,"Hip Flexors": 0.2,"Core": 0.2,"Lats": 0.1,"Forearms": 0.05}}
 }
 
 
@@ -50,13 +52,13 @@ DEFAULT_LOAD = {
     "Push-up": 1.0,
     "DB Bench Press": 1.7,
     "DB Chest Fly": 0.9,
-    "DB Shoulder Press": 1.0,
+    "DB Shoulder Press": 1.7,
     "Lateral Raise": 1.0,
     "DB Triceps Extension": 1.0,
     "Diamond Push-up": 1.1,     
-    "Decline Push-up": 1.2, 
+    "Decline Push-up": 1.1, 
 
-    "Dead Hang": 0.3,
+    "Dead Hang": 0.6,
     "Scapular Pull-up": 1.0,
     "Negative Pull-up": 1.5,
     "One-arm DB Row": 1.7,
@@ -71,9 +73,11 @@ DEFAULT_LOAD = {
     "Lunge": 1.0,
     "Plank": 1.2,
     "Leg Raise": 1.0,
+    "Active Hang": 0.8,
+    "Hanging Knee Raise": 1.1,
     "Russian Twist": 0.5,
-    "Glute Bridge": 0.5,
-    "High Knees": 0.5,
+    "Glute Bridge": 0.3,
+    "High Knees": 0.4,
     "Crunch": 0.7,
     "DB Side Bends": 0.6,
     "Mountain Climber": 0.5,
