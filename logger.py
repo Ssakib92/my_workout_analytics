@@ -13,13 +13,11 @@ ROUTINES = {
     "push": [
         "Push-up",
         "DB Bench Press",
-        "DB Chest Fly",
         "DB Shoulder Press",
         "Lateral Raise",
         "DB Triceps Extension",
         "Diamond Push-up",     
-        "Decline Push-up", 
-        "Push-up"
+        "Decline Push-up"
     ],
 
     "pull": [

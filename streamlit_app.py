@@ -30,6 +30,16 @@ from engine.analysis import (
     coverage_completeness_score
 )
 
+# ---- Progress ----
+from engine.progress import (
+    BASELINE_ROUTINE,
+    BASELINE_MUSCLE,
+    compute_final_target,
+    compute_current_from_logs,
+    progress_ratio,
+    routine_progress_series
+)
+
 BODYWEIGHT_KG = 63
 
 
@@ -56,7 +66,11 @@ if history.empty:
     st.warning("No workout data found. Log workouts first.")
     st.stop()
 
-history["date"] = pd.to_datetime(history["date"])
+history["date"] = pd.to_datetime(
+    history["date"],
+    format="mixed",
+    errors="coerce"
+)
 
 
 # ==============================
@@ -289,3 +303,112 @@ st.caption(
     "All scores represent relative training stimulus. "
     "Not absolute force, hypertrophy, or calories."
 )
+
+# ==============================
+# PROGRESS: BASELINE → CURRENT → FINAL
+# ==============================
+
+final_muscle, final_routine = compute_final_target()
+current_muscle, current_routine = compute_current_from_logs(filtered)
+
+st.divider()
+st.subheader("📊 Muscle Intensity — Baseline vs Current vs Final")
+
+muscle_rows = []
+
+for muscle in final_muscle:
+    baseline = BASELINE_MUSCLE.get(muscle, 0.0)
+    current = current_muscle.get(muscle, 0.0)
+    final = final_muscle[muscle]
+
+    muscle_rows.append({
+        "Muscle": muscle,
+        "Baseline": round(baseline, 1),
+        "Current": round(current, 1),
+        "Final": round(final, 1),
+        "Δ vs Baseline": round(current - baseline, 1),
+        "% Progress": round(
+            ((current - baseline) / (final - baseline)) * 100
+            if final > baseline else 100.0,1)
+    })
+
+muscle_progress_df = pd.DataFrame(muscle_rows).sort_values(
+    "% Progress", ascending=False
+)
+
+st.dataframe(muscle_progress_df, use_container_width=True)
+
+st.subheader("📊 Routine Intensity — Baseline vs Current vs Final")
+
+routine_rows = []
+
+for routine in final_routine:
+    baseline = BASELINE_ROUTINE.get(routine, 0.0)
+    current = current_routine.get(routine, 0.0)
+    final = final_routine[routine]
+
+    routine_rows.append({
+        "Routine": routine.upper(),
+        "Baseline": round(baseline, 1),
+        "Current": round(current, 1),
+        "Final": round(final, 1),
+        "Δ vs Baseline": round(current - baseline, 1),
+        "% Progress": round(
+            ((current - baseline) / (final - baseline)) * 100
+            if final > baseline else 100.0,1)
+    })
+
+routine_progress_df = pd.DataFrame(routine_rows).sort_values(
+    "% Progress", ascending=False
+)
+
+st.dataframe(routine_progress_df, use_container_width=True)
+
+st.divider()
+st.subheader("📈 Routine Progression (Δ from Baseline)")
+
+progress_df = routine_progress_series(
+    filtered,
+    BASELINE_ROUTINE,
+    window=3
+)
+
+if progress_df.empty:
+    st.info("Not enough sessions to show progression (need ≥3).")
+else:
+    # X-axis as session index
+    x = list(range(1, len(progress_df) + 1))
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+
+    # Transparent backgrounds (Streamlit dark-mode friendly)
+    fig.patch.set_alpha(0)
+    ax.set_facecolor("none")
+
+    # Plot lines
+    ax.plot(x, progress_df["push"], label="Push", marker="o")
+    ax.plot(x, progress_df["pull"], label="Pull", marker="o")
+    ax.plot(x, progress_df["core"], label="Core", marker="o")
+
+
+    # Baseline reference line
+    ax.axhline(0, linestyle="--", linewidth=1, alpha=0.6)
+
+    # Axis labels & title (light text)
+    ax.set_xlabel("Session Index", color="#DDDDDD")
+    ax.set_ylabel("Δ Intensity vs Baseline", color="#DDDDDD")
+    ax.set_title("Routine-wise Progression (Last 3-Session Window)", color="#FFFFFF")
+
+    # Ticks styling
+    ax.tick_params(axis="x", colors="#CCCCCC")
+    ax.tick_params(axis="y", colors="#CCCCCC")
+
+    # Grid styling
+    ax.grid(True, alpha=0.2)
+
+    # Legend styling
+    legend = ax.legend()
+    for text in legend.get_texts():
+        text.set_color("#DDDDDD")
+
+    st.pyplot(fig)
